@@ -25,4 +25,4 @@ def main(page: ft.Page):
         )
     )
 
-ft.app(main)
+ft.app(target=main, view=ft.FLET_APP, port=8702)
