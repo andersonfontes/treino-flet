@@ -1,3 +1,6 @@
+# ATENÇÃO: execicios alterados pra implementr uso de VIEWS do flet, pra navegação adequada
+# alterações nos comentarios laterais
+
 # A rota da página é uma parte da URL do aplicativo após o símbolo:#
 # A rota padrão do aplicativo, se não for definida na URL do aplicativo pelo usuário, é . Todas as rotas começam com , por exemplo , .///store/authors/1/books/2
 # A rota do aplicativo pode ser obtida lendo a propriedade, por exemplo:page.route
@@ -62,10 +65,13 @@
 # Esse local é page.on_route_change manipulador de eventos.
 # Vamos juntar tudo em um exemplo completo que permite navegar entre duas páginas:
 
+# ATENÇÃO: execicios alterados pra implementr uso de VIEWS do flet, pra navegação adequada
+# alterações nos comentarios laterais
+
 import flet as ft
 
-def main(page: ft.Page):
-    page.title = "Routes Example"
+def carregar_exercicio(page: ft.Page):  # main => carregar_exercicio
+    page.title = "Exemplo de rotas"
 
     def route_change(route):
         page.views.clear()
@@ -74,7 +80,7 @@ def main(page: ft.Page):
                 "/",
                 [
                     ft.AppBar(title=ft.Text("Flet app"), bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST),
-                    ft.ElevatedButton("Visit Store", on_click=lambda _: page.go("/store")),
+                    ft.ElevatedButton("Visit Store", on_click=lambda _: page.go("/store"))
                 ],
             )
         )
@@ -85,6 +91,7 @@ def main(page: ft.Page):
                     [
                         ft.AppBar(title=ft.Text("Store"), bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST),
                         ft.ElevatedButton("Go Home", on_click=lambda _: page.go("/")),
+                    ft.ElevatedButton("Voltar ao menu", on_click=lambda _: voltar_ao_menu(page)),  # volta pro menu
                     ],
                 )
             )
@@ -100,4 +107,9 @@ def main(page: ft.Page):
     page.go(page.route)
 
 
-ft.app(main, view=ft.AppView.WEB_BROWSER)
+# ft.app(main, view=ft.AppView.WEB_BROWSER) 
+
+def voltar_ao_menu(page: ft.Page):
+    page.views.clear()
+    import main
+    main.carregar_menu(page)

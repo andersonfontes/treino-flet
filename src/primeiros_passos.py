@@ -1,7 +1,10 @@
+# ATENÇÃO: execicios alterados pra implementr uso de VIEWS do flet, pra navegação adequada
+# alterações nos comentarios
+
 import flet as ft
 
 
-def main(page: ft.Page):
+def carregar_exercicio(page: ft.Page):  # main => carregar_exercicio
     counter = ft.Text("0", size=50, data=0)
 
     def increment_click(e):  # funcao original do exemplo quando vc da o flet create
@@ -47,9 +50,14 @@ def main(page: ft.Page):
             ft.TextField(label="Seu nome", width=500),     # brincando e conhecendo algumas propriedades dos controles
             ft.ElevatedButton(text="Diga meu nome!", width=250)
         ], alignment="center", expand=True)
-    )  
+    )  ,
+        ft.ElevatedButton("Voltar", on_click=lambda _: voltar_ao_menu(page)) #nova linha (botao voltar)
 )
 
 
 
-ft.app(main)
+# função de menu no próprio arquivo para usar como "voltar"
+def voltar_ao_menu(page: ft.Page):
+    page.views.clear()
+    import main
+    main.carregar_menu(page)

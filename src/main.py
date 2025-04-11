@@ -1,25 +1,20 @@
 import flet as ft
-import subprocess
-import sys
-import os
-import random
+import counter
+import primeiros_passos
+import rotas_e_navegacao
 
-porta_livre = random.randint(8600, 8700) # acha uma porta livre 
-
-
-
-def main(page: ft.Page):
-    page.title = "Menu Inicial"
-
-    def abrir_counter(e):
-        # Garante que vai usar o mesmo Python e caminho absoluto do script
-        python_exec = sys.executable
-        caminho = os.path.abspath("src/counter.py")
-        subprocess.Popen([python_exec, caminho])
+def carregar_menu(page: ft.Page):
+    page.title = "Menu Flet"
+    page.clean()
 
     page.add(
-        ft.AppBar(title=ft.Text("Menu Inicial")),
-        ft.ElevatedButton("Abrir Contador", on_click=abrir_counter)
+        ft.AppBar(title=ft.Text("Menu de Exercícios")),
+        ft.ElevatedButton("Exercício: Contador", on_click=lambda e: counter.carregar_exercicio(page)),
+        ft.ElevatedButton("Exercício: Primeiros Passos", on_click=lambda e: primeiros_passos.carregar_exercicio(page)),
+        ft.ElevatedButton("Exercício: Rotas e Navegação", on_click=lambda e: rotas_e_navegacao.carregar_exercicio(page))
     )
 
-ft.app(target=main, view=ft.FLET_APP, port=8701)
+def main(page: ft.Page):
+    carregar_menu(page)
+
+ft.app(target=main)

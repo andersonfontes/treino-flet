@@ -1,6 +1,9 @@
+# ATENÇÃO: execicios alterados pra implementr uso de VIEWS do flet, pra navegação adequada
+# alterações nos comentarios
+
 import flet as ft
 
-def main(page: ft.Page):
+def carregar_exercicio(page: ft.Page):  # main => carregar_exercicio
     page.title = "Flet counter example"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
@@ -22,7 +25,12 @@ def main(page: ft.Page):
                 ft.IconButton(ft.Icons.ADD, on_click=plus_click),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
-        )
+        ),
+        ft.ElevatedButton("Voltar", on_click=lambda _: voltar_ao_menu(page)) #nova linha (botao voltar)
     )
 
-ft.app(target=main, view=ft.FLET_APP, port=8702)
+# função de menu no próprio arquivo para usar como "voltar"
+def voltar_ao_menu(page: ft.Page):
+    page.views.clear()
+    import main
+    main.carregar_menu(page)
